@@ -1,8 +1,11 @@
-# React + Vite
+# Introduction
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+this project is a website for a company that sells products online. The website is built using tailwind for stying and redux for state management. The website has the following features:
 
-Currently, two official plugins are available:
+... which I forgot. I will add them later.
+### NOTICE
+This project is still in development. I will update the README.md file when I remember the features of the website.
+And for backend api, I just use a public FAAAAAAAKE API. So, the data will not be saved. 
+```
+ 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

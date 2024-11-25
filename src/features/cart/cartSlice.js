@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
-
+import updateLocalStorageState from "../../utilities/updateLocalStorageState";
+import getLocalStorageState from "../../utilities/getLocalStorageState";
+// {
+//   pizzaId: 12,
+//   name: "Mediterranean",
+//   quantity: 2,
+//   unitPrice: 16,
+//   totalPrice: 32,
+// },
 const initialState = {
-  cart: [
-    // {
-    //   pizzaId: 12,
-    //   name: "Mediterranean",
-    //   quantity: 2,
-    //   unitPrice: 16,
-    //   totalPrice: 32,
-    // },
-  ],
+  cart: JSON.parse(getLocalStorageState("cart")) || [],
 };
 
 const cartSlice = createSlice({
@@ -28,17 +28,20 @@ const cartSlice = createSlice({
       } else {
         state.cart.push(action.payload);
       }
+      updateLocalStorageState("cart", state.cart);
     },
 
     deleteItem(state, action) {
       //payload = pizzaId
       state.cart = state.cart.filter((item) => item.pizzaId !== action.payload);
+      localStorage.setItem("cart", JSON.stringify(state.cart));
     },
     increaseItemQuantity(state, action) {
       //payload = pizzaId
       const item = state.cart.find((item) => item.pizzaId === action.payload);
       item.quantity++;
       item.totalPrice = item.quantity * item.unitPrice;
+      localStorage.setItem("cart", JSON.stringify(state.cart));
     },
     decreaseItemQuantity(state, action) {
       //payload = pizzaID
@@ -46,9 +49,11 @@ const cartSlice = createSlice({
       item.quantity--;
       item.totalPrice = item.quantity * item.unitPrice;
       if (item.quantity === 0) cartSlice.caseReducers.deleteItem(state, action);
+      localStorage.setItem("cart", JSON.stringify(state.cart));
     },
     clearCart(state) {
       state.cart = [];
+      localStorage.setItem("cart", JSON.stringify(state.cart));
     },
   },
 });

@@ -3,6 +3,7 @@ import Button from "../../ui/Button";
 import { useDispatch } from "react-redux";
 import { updateName } from "./userSlice";
 import { useNavigate } from "react-router-dom";
+import updateLocalStorageState from "../../utilities/updateLocalStorageState";
 
 function CreateUser() {
   //local username
@@ -14,6 +15,7 @@ function CreateUser() {
     e.preventDefault();
     if (username === "") return;
     dispatch(updateName(username));
+    updateLocalStorageState("user", username);
     navigate("/menu");
   }
 
